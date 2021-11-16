@@ -1,0 +1,61 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    &__filters {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;  
+    }
+    &__filter {
+        margin-right: 20px;
+        border: none;
+        outline: none;
+        border: 1px solid #ccc;
+        width: 150px;
+        padding: 10px 5px;
+        border-radius: 5px;
+        background-color:#e2e2e2;
+        cursor: pointer;
+    }
+    &__filter:hover {
+        box-shadow:0 0 10px white;
+    }
+    &__info {
+        text-align: center;
+        color: #cfcfcf;
+    }
+    &__button {
+        align-self: center;
+        background-color:#d1d1d1;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        padding: 5px 20px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        margin: 4px 2px;
+        opacity: 0.6;
+        transition: 0.3s;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+        &:hover {
+            opacity: 1;
+            color:#842c00;
+        }
+        &:disabled{
+            opacity: 0.2;
+            color:black;
+        }
+    }
+}
+.form__filter > option {
+    font-size: 14px;
+    font-weight: 600;
+}
+.form__filter > option:hover {
+    color: #842c00;
+}
+
+    
