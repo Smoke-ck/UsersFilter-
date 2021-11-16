@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react'
-import { getUsers } from './api';
+import React,{ useState, useEffect } from 'react'
+import { getUsers, IUsers } from './api';
 import List from './components/List/List';
 import './App.scss';
 
 function App() {
 
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState<IUsers[]>([]);
+
   useEffect(() => {
     getUsers().then(data => setUsers(data.results));
   }, [])

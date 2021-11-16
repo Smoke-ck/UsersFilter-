@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { FC } from 'react'
+import { IUsers } from '../../api';
 import './ListItem.scss'
 
-function ListItem({ user}) {
+type IUsersListItem = {
+    user:IUsers
+}
+const ListItem: FC<IUsersListItem> = ({ user }) => {
     const {gender,name,picture,dob,nat,email} = user;
     const date = dob.date.slice(0,10)
     return (

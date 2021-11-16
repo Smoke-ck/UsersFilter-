@@ -1,24 +1,28 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { useState } from 'react';
 import './Filter.scss'
 
-function Filter({ usersfilter }) {
+type IUsersFilter = {
+    usersfilter: (gender:string,nationality:string[]) => void
+}
+
+const Filter:FC<IUsersFilter> = ({ usersfilter }) => {
 
     const [gender, setGender] = useState('')
-    const [nationality, setNationality] = useState([])
-    const [disable, setdisable] = useState('true')
-
-    const handleSubmit = (e) => {
+    const data: string[] = [];
+    const [nationality, setNationality] = useState(data)
+    const [disable, setdisable] = useState(true)
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         usersfilter(gender, nationality);
     }
 
-    const handleGender = (e) => {
+    const handleGender = (e:React.ChangeEvent<HTMLSelectElement>) => {
         setGender(e.target.value)
         setdisable(false)
     }
 
-    const handleNationality = (e) => {
+    const handleNationality = (e:React.ChangeEvent<HTMLSelectElement>) => {
         let element = e.target.value;
         if (nationality.includes(element)) {
             const newNationality = nationality.filter((value) => value !== element);
@@ -30,7 +34,7 @@ function Filter({ usersfilter }) {
     return (
         <form onSubmit={handleSubmit} className="form">
             <div className="form__filters">
-                <select onChange={handleGender} size="4" className='form__filter form__genderFilter'>
+                <select onChange={handleGender} size={4} className='form__filter form__genderFilter'>
                     <option disabled>Gender</option>
                     <option value="all">All</option>
                     <option value="male">Male</option>
@@ -40,7 +44,7 @@ function Filter({ usersfilter }) {
                     value={nationality}
                     onChange={handleNationality}
                     multiple={true}
-                    size="4"
+                    size={4}
                     className='form__filter form__nationalityFilter'>
                     <option disabled>Nationality</option>
                     <option value="all">All</option>

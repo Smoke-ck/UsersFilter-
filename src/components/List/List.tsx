@@ -1,22 +1,27 @@
-import React from 'react'
+import React, { FC } from 'react'
 import ListItem from '../ListItem/ListItem'
 import Filter from '../Filter/Filter'
 import { useState, useEffect } from 'react';
 import './List.scss'
+import { IUsers } from '../../api';
 
-function List({ users }) {
+type IUsersList = {
+    users: Array<IUsers>
+}
+
+const List: FC<IUsersList> = ({ users }) => {
 
     const [newUsers, setNewUsers] = useState(users)
 
     useEffect(() => {
-        setNewUsers(JSON.parse(window.localStorage.getItem('newUsers')));
+        setNewUsers(JSON.parse(window.localStorage.getItem('newUsers') || '[]'));
     }, []);
 
     useEffect(() => {
         window.localStorage.setItem('newUsers', JSON.stringify(newUsers));
     }, [newUsers]);
 
-    const usersfilter = (gender, nationality) => {
+    const usersfilter = (gender: string, nationality: string[]) => {
 
         if (gender === "all" && nationality[0] === "all") {
             return setNewUsers(users);
@@ -37,12 +42,13 @@ function List({ users }) {
             setNewUsers(userFilter)
         }
     }
+
     return <>
         <Filter usersfilter={usersfilter} />
         <div className="list">
             {newUsers.map((user) => (
                 <ListItem
-                    key={user.index}
+                    key={user.dob.date}
                     user={user} />
             ))}
         </div>
