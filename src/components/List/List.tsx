@@ -1,9 +1,9 @@
-import React, { FC } from 'react'
+   import React, { FC } from 'react'
 import ListItem from '../ListItem/ListItem'
 import Filter from '../Filter/Filter'
 import { useState, useEffect } from 'react';
 import './List.scss'
-import { IUsers } from '../../api';
+import { getFilterUsers, IUsers } from '../../api';
 
 type IUsersList = {
     users: Array<IUsers>
@@ -22,25 +22,8 @@ const List: FC<IUsersList> = ({ users }) => {
     }, [newUsers]);
 
     const usersfilter = (gender: string, nationality: string[]) => {
-
-        if (gender === "all" && nationality[0] === "all") {
-            return setNewUsers(users);
-        }
-        if (gender === "all" && nationality.length > 0) {
-            const userFilter = users.filter(user => nationality.includes(user.nat))
-            return setNewUsers(userFilter);
-        }
-        if (gender === "all") {
-            return setNewUsers(users);
-        }
-
-        let newUsers = users.filter(user => user.gender === gender);
-        setNewUsers(newUsers)
-
-        if (nationality.length && nationality[0] !== 'all') {
-            const userFilter = newUsers.filter(user => nationality.includes(user.nat))
-            setNewUsers(userFilter)
-        }
+        const nat = nationality.join().toLowerCase();
+        getFilterUsers(gender,nat).then(data => setNewUsers(data.results))
     }
 
     return <>
