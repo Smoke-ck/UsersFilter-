@@ -29,6 +29,7 @@ const Filter:FC<IUsersFilter> = ({ usersfilter }) => {
             return setNationality(newNationality)
         }
         setNationality([...nationality, element])
+        setdisable(false)
     }
 
     return (
@@ -67,7 +68,7 @@ const Filter:FC<IUsersFilter> = ({ usersfilter }) => {
                     <option value="US">US</option>
                 </select>
             </div>
-            <p className="form__info">Please select gender</p>
+            <p className="form__info">Please select filter</p>
             <input type="submit" value="Apply filters" disabled={disable} className="form__button" />
         </form>
     )

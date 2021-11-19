@@ -21,7 +21,7 @@ const List: FC<IUsersList> = ({ users }) => {
         window.localStorage.setItem('newUsers', JSON.stringify(newUsers));
     }, [newUsers]);
 
-    const usersfilter = (gender: string, nationality: string[]) => {
+    const usersfilter = (gender: string , nationality: string[]) => {
         const nat = nationality.join().toLowerCase();
         getFilterUsers(gender,nat).then(data => setNewUsers(data.results))
     }
