@@ -11,7 +11,11 @@ type IUsersList = {
 
 const List: FC<IUsersList> = ({ users }) => {
 
+    const genderData = ['All', 'Male', 'Female'];
+    const nationalityData = ['All','AU','BR','CA','CH','DE','DK','ES','FI','FR','GB','IE','IR','NO','NL','NZ','TR','US'];
     const [newUsers, setNewUsers] = useState(users)
+
+    
 
     useEffect(() => {
         setNewUsers(JSON.parse(window.localStorage.getItem('newUsers') || '[]'));
@@ -27,7 +31,10 @@ const List: FC<IUsersList> = ({ users }) => {
     }
 
     return <>
-        <Filter usersfilter={usersfilter} />
+        <Filter 
+        usersfilter={usersfilter} 
+        genderData={genderData}
+        nationalityData={nationalityData}/>
         <div className="list">
             {newUsers.map((user) => (
                 <ListItem

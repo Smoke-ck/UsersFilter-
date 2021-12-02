@@ -4,9 +4,11 @@ import './Filter.scss'
 
 type IUsersFilter = {
     usersfilter: (gender:string,nationality:string[]) => void
+    genderData:string[]
+    nationalityData:string[]
 }
 
-const Filter:FC<IUsersFilter> = ({ usersfilter }) => {
+const Filter:FC<IUsersFilter> = ({ usersfilter, genderData, nationalityData }) => {
 
     const [gender, setGender] = useState('')
     const data: string[] = [];
@@ -37,9 +39,7 @@ const Filter:FC<IUsersFilter> = ({ usersfilter }) => {
             <div className="form__filters">
                 <select onChange={handleGender} size={4} className='form__filter form__genderFilter'>
                     <option disabled>Gender</option>
-                    <option value="all">All</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    {genderData.map(value => <option value={value}>{value}</option>)}
                 </select>
                 <select
                     value={nationality}
@@ -48,24 +48,7 @@ const Filter:FC<IUsersFilter> = ({ usersfilter }) => {
                     size={4}
                     className='form__filter form__nationalityFilter'>
                     <option disabled>Nationality</option>
-                    <option value="all">All</option>
-                    <option value="AU">AU</option>
-                    <option value="BR">BR</option>
-                    <option value="CA">CA</option>
-                    <option value="CH">CH</option>
-                    <option value="DE">DE</option>
-                    <option value="DK">DK</option>
-                    <option value="ES">ES</option>
-                    <option value="FI">FI</option>
-                    <option value="FR">FR</option>
-                    <option value="GB">GB</option>
-                    <option value="IE">IE</option>
-                    <option value="IR">IR</option>
-                    <option value="NO">NO</option>
-                    <option value="NL">NL</option>
-                    <option value="NZ">NZ</option>
-                    <option value="TR">TR</option>
-                    <option value="US">US</option>
+                    {nationalityData.map(value => <option value={value}>{value}</option>)}
                 </select>
             </div>
             <p className="form__info">Please select filter</p>
